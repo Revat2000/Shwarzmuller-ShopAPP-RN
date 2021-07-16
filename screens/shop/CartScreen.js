@@ -13,7 +13,7 @@ import Colors from '../../constants/Colors';
 import CartItem from '../../components/shop/CartItem';
 import Card from '../../components/UI/Card';
 import * as cartActions from '../../store/actions/cart';
-// import * as ordersActions from '../../store/actions/orders';
+import * as ordersActions from '../../store/actions/orders';
 
 const CartScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,11 +37,11 @@ const CartScreen = props => {
 
     const dispatch = useDispatch();
 
-    const sendOrderHandler = async () => {
-      setIsLoading(true);
-      await dispatch(ordersActions.addOrder(cartItems, cartTotalAmount));
-      setIsLoading(false);
-    };
+    // const sendOrderHandler = async () => {
+    //   setIsLoading(true);
+    //   await dispatch(ordersActions.addOrder(cartItems, cartTotalAmount));
+    //   setIsLoading(false);
+    // };
 
   return (
 
@@ -60,7 +60,10 @@ const CartScreen = props => {
             color={Colors.accent}
             title="Order Now"
             disabled={cartItems.length === 0}
-            onPress={sendOrderHandler}
+            // onPress={sendOrderHandler}
+            onPress={() => {
+              dispatch(ordersActions.addOrder(cartItems, cartTotalAmount));
+            }}
           />
         )}
       </Card>
@@ -87,32 +90,6 @@ export const screenOptions = {
   headerTitle: 'Your Cart'
 };
 
-// const styles = StyleSheet.create({
-//   screen: {
-//     margin: 20
-//   },
-//   summary: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     justifyContent: 'space-between',
-//     marginBottom: 20,
-//     padding: 10,
-//     shadowColor: 'black',
-//     shadowOpacity: 0.26,
-//     shadowOffset: { width: 0, height: 2 },
-//     shadowRadius: 8,
-//     elevation: 6,
-//     borderRadius: 10,
-//     backgroundColor: 'white',
-//   },
-//   summaryText: {
-//     fontFamily: 'open-sans-bold',
-//     fontSize: 18
-//   },
-//   amount: {
-//     color: Colors.primary
-//   }
-// });
 const styles = StyleSheet.create({
   screen: {
     margin: 20

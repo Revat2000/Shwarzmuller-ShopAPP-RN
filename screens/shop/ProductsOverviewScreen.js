@@ -1,5 +1,13 @@
-import React from 'react';
-import { FlatList, Text } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import {
+  View,
+  Text,
+  FlatList,
+  Button,
+  Platform,
+  ActivityIndicator,
+  StyleSheet
+} from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -29,13 +37,25 @@ const ProductsOverviewScreen = props => {
           image={itemData.item.imageUrl}
           title={itemData.item.title}
           price={itemData.item.price}
-          onViewDetail={() => {
+          onSelect={() => {
             selectItemHandler(itemData.item.id, itemData.item.title);
-           }}
-          onAddToCart={() => {
-            dispatch(cartActions.addToCart(itemData.item));
-           }}
-        />
+          }}
+        >
+          <Button
+            color={Colors.primary}
+            title="View Details"
+            onPress={() => {
+              selectItemHandler(itemData.item.id, itemData.item.title);
+            }}
+          />
+          <Button
+            color={Colors.primary}
+            title="To Cart"
+            onPress={() => {
+              dispatch(cartActions.addToCart(itemData.item));
+            }}
+          />
+        </ProductItem>
       }
     />
   );
@@ -50,10 +70,9 @@ export const screenOptions = navData => {
         <Item
           title="Menu"
           iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
-          // onPress={() => {
-          //   navData.navigation.toggleDrawer();
-          // }}
-          onPress={() => { }}
+          onPress={() => {
+            navData.navigation.toggleDrawer();
+          }}
         />
       </HeaderButtons>
     ),
