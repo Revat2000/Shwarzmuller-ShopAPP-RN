@@ -62,10 +62,9 @@ export const screenOptions = navData => {
         <Item
           title="Cart"
           iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-          // onPress={() => {
-          //   navData.navigation.navigate('Cart');
-          // }}
-          onPress={() => { }}
+          onPress={() => {
+            navData.navigation.navigate('Cart');
+          }}
         />
       </HeaderButtons>
     )

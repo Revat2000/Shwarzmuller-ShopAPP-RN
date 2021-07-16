@@ -9,6 +9,9 @@ import ProductDetailScreen, {
   screenOptions as productDetailScreenOptions
 } from '../screens/shop/ProductDetailScreen';
 import Colors from '../constants/Colors';
+import CartScreen, {
+  screenOptions as cartScreenOptions
+} from '../screens/shop/CartScreen';
 
 const defaultNavOptions = {
   headerStyle: {
@@ -38,11 +41,11 @@ export const ProductsNavigator = () => {
         component={ProductDetailScreen}
         options={productDetailScreenOptions}
       />
-      {/* <ProductsStackNavigator.Screen
+      <ProductsStackNavigator.Screen
         name="Cart"
         component={CartScreen}
         options={cartScreenOptions}
-      /> */}
+      />
     </ProductsStackNavigator.Navigator>
   );
 };
