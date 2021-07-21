@@ -11,7 +11,11 @@ import CartScreen, { screenOptions as cartScreenOptions } from '../screens/shop/
 import OrdersScreen, { screenOptions as ordersScreenOptions } from '../screens/shop/OrdersScreen';
 import UserProductsScreen, { screenOptions as userProductsScreenOptions} from '../screens/user/UserProductsScreen';
 import EditProductScreen, { screenOptions as editProductScreenOptions} from '../screens/user/EditProductScreen';
+import AuthScreen, { screenOptions as authScreenOptions} from '../screens/user/AuthScreen';
+import StartupScreen from '../screens/StartupScreen';
 import Colors from '../constants/Colors';
+import * as authActions from '../store/actions/auth';
+
 
 const defaultNavOptions = {
   headerStyle: {
@@ -25,6 +29,7 @@ const defaultNavOptions = {
   },
   headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary
 };
+
 
 const ProductsStackNavigator = createStackNavigator();
 
@@ -94,7 +99,7 @@ export const ShopNavigator = () => {
     <ShopDrawerNavigator.Navigator
       drawerContent={props => {
         return (
-          <View style={{ flex: 1, paddingTop: 20 }}>
+          <View style={{ flex: 1, paddingTop: 30 }}>
             <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
               <DrawerItemList {...props} />
               <Button
@@ -153,6 +158,20 @@ export const ShopNavigator = () => {
         }}
       />
     </ShopDrawerNavigator.Navigator>
+  );
+};
+
+const AuthStackNavigator = createStackNavigator();
+
+export const AuthNavigator = () => {
+  return (
+    <AuthStackNavigator.Navigator screenOptions={defaultNavOptions}>
+      <AuthStackNavigator.Screen
+        name="Auth"
+        component={AuthScreen}
+        options={authScreenOptions}
+      />
+    </AuthStackNavigator.Navigator>
   );
 };
 

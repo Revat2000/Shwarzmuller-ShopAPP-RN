@@ -19,6 +19,7 @@ import Colors from '../../constants/Colors';
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
 const formReducer = (state, action) => {
+
   if (action.type === FORM_INPUT_UPDATE) {
     const updatedValues = {
       ...state.inputValues,
@@ -41,11 +42,15 @@ const formReducer = (state, action) => {
   return state;
 };
 
+
 const EditProductScreen = props => {
+  const [checkSubmit, setCheckSubmit] = useState(false);
+  const [isNotConfirmed, setIsNotConfirmed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
 
   const prodId = props.route.params ? props.route.params.productId : null;
+
   const editedProduct = useSelector(state =>
     state.products.userProducts.find(prod => prod.id === prodId)
   );
@@ -138,6 +143,9 @@ const EditProductScreen = props => {
     [dispatchFormState]
   );
 
+
+ 
+
   if (isLoading) {
     return (
       <View style={styles.centered}>
@@ -150,7 +158,7 @@ const EditProductScreen = props => {
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior="padding"
-      keyboardVerticalOffset={100}
+      keyboardVerticalOffset={50}
     >
       <ScrollView>
         <View style={styles.form}>
@@ -161,7 +169,7 @@ const EditProductScreen = props => {
             keyboardType="default"
             autoCapitalize="sentences"
             autoCorrect
-            returnKeyType="next"
+            returnKeyType="done"
             onInputChange={inputChangeHandler}
             initialValue={editedProduct ? editedProduct.title : ''}
             initiallyValid={!!editedProduct}
@@ -172,7 +180,7 @@ const EditProductScreen = props => {
             label="Image Url"
             errorText="Please enter a valid image url!"
             keyboardType="default"
-            returnKeyType="next"
+            returnKeyType="done"
             onInputChange={inputChangeHandler}
             initialValue={editedProduct ? editedProduct.imageUrl : ''}
             initiallyValid={!!editedProduct}
@@ -184,7 +192,7 @@ const EditProductScreen = props => {
               label="Price"
               errorText="Please enter a valid price!"
               keyboardType="decimal-pad"
-              returnKeyType="next"
+              returnKeyType="done"
               onInputChange={inputChangeHandler}
               required
               min={0.1}
@@ -195,9 +203,10 @@ const EditProductScreen = props => {
             label="Description"
             errorText="Please enter a valid description!"
             keyboardType="default"
+            returnKeyType="done"
             autoCapitalize="sentences"
             autoCorrect
-            multiline
+            multil ine
             numberOfLines={3}
             onInputChange={inputChangeHandler}
             initialValue={editedProduct ? editedProduct.description : ''}

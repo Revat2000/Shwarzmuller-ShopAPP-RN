@@ -5,6 +5,7 @@ const INPUT_CHANGE = 'INPUT_CHANGE';
 const INPUT_BLUR = 'INPUT_BLUR';
 
 const inputReducer = (state, action) => {
+  // console.log('state =>', state);
   switch (action.type) {
     case INPUT_CHANGE:
       return {
@@ -26,7 +27,8 @@ const Input = props => {
   const [inputState, dispatch] = useReducer(inputReducer, {
     value: props.initialValue ? props.initialValue : '',
     isValid: props.initiallyValid,
-    touched: false
+    touched: false,
+    // isActive: false
   });
 
   const { onInputChange, id } = props;
@@ -55,6 +57,7 @@ const Input = props => {
     if (props.minLength != null && text.length < props.minLength) {
       isValid = false;
     }
+    // console.log('text =>', text);
     dispatch({ type: INPUT_CHANGE, value: text, isValid: isValid });
   };
 
@@ -71,6 +74,7 @@ const Input = props => {
         value={inputState.value}
         onChangeText={textChangeHandler}
         onBlur={lostFocusHandler}
+
       />
       {!inputState.isValid && inputState.touched && (
         <View style={styles.errorContainer}>
@@ -106,3 +110,14 @@ const styles = StyleSheet.create({
 });
 
 export default Input;
+
+
+
+
+
+
+
+
+
+
+

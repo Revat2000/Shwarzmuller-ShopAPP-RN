@@ -37,11 +37,11 @@ const CartScreen = props => {
 
     const dispatch = useDispatch();
 
-    // const sendOrderHandler = async () => {
-    //   setIsLoading(true);
-    //   await dispatch(ordersActions.addOrder(cartItems, cartTotalAmount));
-    //   setIsLoading(false);
-    // };
+    const sendOrderHandler = async () => {
+      setIsLoading(true);
+      await dispatch(ordersActions.addOrder(cartItems, cartTotalAmount));
+      setIsLoading(false);
+    };
 
   return (
 
@@ -60,10 +60,7 @@ const CartScreen = props => {
             color={Colors.accent}
             title="Order Now"
             disabled={cartItems.length === 0}
-            // onPress={sendOrderHandler}
-            onPress={() => {
-              dispatch(ordersActions.addOrder(cartItems, cartTotalAmount));
-            }}
+            onPress={sendOrderHandler}
           />
         )}
       </Card>

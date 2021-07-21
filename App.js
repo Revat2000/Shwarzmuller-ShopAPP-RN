@@ -4,23 +4,21 @@ import { Provider } from 'react-redux';
 import AppLoading from 'expo-app-loading';
 import * as Font from 'expo-font';
 import ReduxThunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
 
 import productsReducer from './store/reducers/products';
 import cartReducer from './store/reducers/cart';
 import ordersReducer from './store/reducers/orders';
-// import authReducer from './store/reducers/auth';
+import authReducer from './store/reducers/auth';
 import AppNavigator from './navigation/AppNavigator';
 
 const rootReducer = combineReducers({
   products: productsReducer,
   cart: cartReducer,
   orders: ordersReducer,
-  // auth: authReducer
+  auth: authReducer
 });
 
-// const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
-const store = createStore(rootReducer, composeWithDevTools());
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 const fetchFonts = () => {
   return Font.loadAsync({
